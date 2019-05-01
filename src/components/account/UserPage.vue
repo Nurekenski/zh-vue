@@ -5,30 +5,39 @@
         <div class="content">
              <div class="sidebar">
                     <div class="nameMenu">
-                        <p class="menuCloseMobile">{{$t("message.title_menu")}}</p>
+                        <p class="menuCloseMobile">Меню</p>
                         <img src="../../assets/images/close.png" class="closeMenu" @click="closeMenu" />
                     </div>
+                    
                     <ul>
                         <!--  v-for="item in items" -->
                         <li>
                             <img src="../../assets/images/1.png" alt="images">                 
-                            <div @click="closeMenu"><router-link to="/user" class="routerLink">{{$t("message.personal_page")}}</router-link></div>
+                            <div @click="closeMenu"><router-link to="/user" class="routerLink">Добавление абитуриента</router-link></div>
                         </li>
                         <li>
                             <img src="../../assets/images/2.png" alt="images">
-                            <div @click="closeMenu"><router-link to="/user/profile" class="routerLink">{{$t("message.personal_info")}}</router-link></div>
+                            <div @click="closeMenu"><router-link to="/user/profile" class="routerLink">Получить данные</router-link></div>
                         </li>          
-                        <li>
+                        <!-- <li>
                             <img src="../../assets/images/3.png" alt="images">
-                            <div @click="closeMenu"><router-link to="/user/settings" class="routerLink">{{$t("message.settings")}}</router-link></div>
-                        </li>          
+                            <div @click="closeMenu"><router-link to="/user/settings" class="routerLink">Проверка документов</router-link></div>
+                        </li>           -->
                         <li>
-                            <img src="../../assets/images/4.png" alt="images">
-                            <div @click="closeMenu"><router-link to="/user/faq" class="routerLink">{{$t("message.ans_ques")}}</router-link></div>
-                        </li>          
+                            <img src="../../assets/images/statistics.png" alt="images">
+                            <div  @click="callStatistics">Статистика</div>
+                        </li>   
+                        <li>
+                            <img src="../../assets/images/checked.png" alt="images">
+                            <div @click="closeMenu"><router-link to="/user/checked" class="routerLink">Проверенные</router-link></div>
+                        </li>  
+                        <li>
+                            <img src="../../assets/images/not_checked.png" alt="images">
+                            <div @click="closeMenu"><router-link to="/user/not_checked" class="routerLink">Не проверенные</router-link></div>
+                        </li>         
                         <li>
                             <img src="../../assets/images/5.png" alt="images">
-                            <a class="routerLink">{{$t("message.logout")}}</a>                                                
+                            <a class="routerLink" @click="Logout">Выйти</a>                                                
                         </li>          
                     </ul>
                    
@@ -40,7 +49,7 @@
         <div class="language-div">
             <div class="selector">
                 <img :src="link" alt="">
-                <p style="color:red">{{ selected }}</p>
+                <!-- <p style="color:red">{{ selected }}</p> -->
                 <select v-model="$i18n.locale"  @change="onChange" >
                     <option v-for="(key, value) in object"  :key="`Lang${value}`" class="op" :value="value"><p>{{ key }} </p></option>
                 </select>
@@ -76,14 +85,21 @@
         },
         methods: {
             closeMenu() {
-                var menu = document.querySelector('.sidebar');
-                var opM = document.querySelector('.menuBlock'); 
-                menu.style.transition = ".5s";
-                menu.style.left = "-320px";
-                opM.style.display = "none";
+                // var menu = document.querySelector('.sidebar');
+                // var opM = document.querySelector('.menuBlock'); 
+                // menu.style.transition = ".5s";
+                // menu.style.left = "-320px";
+                // opM.style.display = "none";
             },
             onChange:function(event){
-                this.link = this.languages[event.target.value];
+                // this.link = this.languages[event.target.value];
+            },
+            Logout() {
+                localStorage.removeItem("access_token");
+                this.$router.push('/admin');
+            },
+            callStatistics(){
+                  this.$router.push('/statistic');
             }
         }
     };
@@ -114,7 +130,7 @@
 
         .sidebar {
             width: 300px;
-            height: 265px;
+            height: 340px;
             background: var(--main-white-color);
             margin-left: 20px;
             

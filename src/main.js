@@ -4,9 +4,18 @@ import router from './router';
 import VueCookies from 'vue-cookies'
 import axios from 'axios';
 import VModal from 'vue-js-modal';
-
 import VueI18n from 'vue-i18n';
+import 'v-slim-dialog/dist/v-slim-dialog.css'
+import SlimDialog from 'v-slim-dialog'
+
+Vue.use(SlimDialog)
 Vue.use(VueI18n);
+import VueCarousel from 'vue-carousel';
+
+import JsonExcel from 'vue-json-excel';
+Vue.component('downloadExcel', JsonExcel);
+        
+Vue.use(VueCarousel);
 
 Vue.config.productionTip = false;
 Vue.use(VueCookies);
@@ -14,9 +23,10 @@ Vue.use(VueCookies);
 Vue.use(VModal, { dialog: true });
 
 Vue.prototype.$http = axios.create({
-  baseURL: 'http://192.168.0.2:8000/v1',
-});
 
+  baseURL: 'http://192.168.43.44/v2'
+  
+});
 
 const messages = {
   en: {
@@ -64,7 +74,6 @@ const messages = {
       email_error: 'Please enter a valid email address',
       email_empty: 'Enter your email',
       locale: 'en'
-
 
     }
   },

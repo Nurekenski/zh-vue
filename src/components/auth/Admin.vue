@@ -5,18 +5,15 @@
                     <!-- <form novalidate="true" class="form_data">
                          -->
                     <div class="form_data">
-
-                   
                         <div class="first-block">
                             <div class="first"><img src="../../assets/images/logo_arsu.png"></div>
                          
                          <div class="signPage" v-if="signPage==true">
-                            <div v-if="this.loader==true">
+                             <div v-if="this.loader==true">
                                 <div class="loaders"><img src="../../assets/images/26.gif"></div>
                             </div>
-                           
                              <center>
-                                <h4>Вход в личный кабинет Абитуриента</h4>
+                                <h4>Вход в личный кабинет</h4>
                              </center>                           
                             <p class="success">{{ this.register.success }}</p>
                             <p class="error">{{this.register.info}}</p>
@@ -35,49 +32,13 @@
                                 >
                             </div>
                             <!-- <p class="text">Құпия сөз ұмыттыңыз ба?</p> -->
-                            <button class="sign_in" @click="confirmationStudent"><p>Войти</p></button>
-                            <button class="sign_in" @click="forgotPasswordPage"><p>Забыли пароль?</p></button>
+                            <button class="sign_in" @click="confirmationTeacher"><p>Войти</p></button>
+                            <!-- <button class="sign_in" @click="forgotPasswordPage"><p>Забыли пароль?</p></button> -->
                          </div>
-                         <div class="signPage" v-if="forgotPage==true">
-                            <div v-if="this.loader==true">
-                                <div class="loaders"><img src="../../assets/images/26.gif"></div>
-                            </div>
-                            <p class="success">{{this.register.success}}</p>
-                            <h4>Восстоновить пароль</h4>
-                            <div class="line">
-                                <!-- <img src="../../assets/images/mail.png"> -->
-                                <input 
-                                 placeholder="ИИН"
-                                 autocomplete="false"
-                                 v-model.trim="register.login"
-                                >
-                            </div>
-                             <div class="line">
-                                <!-- <img src="../../assets/images/mail.png"> -->
-                                <input 
-                                 placeholder="Телефон"
-                                 autocomplete="false"
-                                 v-model.trim="register.phone"
-                                >
-                            </div>
-                            <div class="line">
-                                <!-- <img src="../../assets/images/lock.png"> -->
-                                <input placeholder="Пароль"
-                                 v-model.trim="register.password"
-                                 type="password"
-                                >
-                            </div>
-                            <!-- <p class="text">Құпия сөз ұмыттыңыз ба?</p> -->
-                            <button class="sign_in" @click="forgotPassword"><p>Изменить</p></button>
-                            <button class="sign_in" @click="backButton"><p>Назад</p></button>
-                            
-                         </div>
-                            <!-- <button class="sign_in"><p>Тіркелу</p></button> -->
-                            <!-- <button class="registration" @click="registration"><p>Тіркелу</p></button> -->
+               
                         </div>
                      </div>
-<!-- 
-                    </form> -->
+
                     <div class="second-block">
                         <div class="second">
                             <center>
@@ -146,85 +107,29 @@
                 onChange:function(event){
                     this.link = this.languages[event.target.value];
                 },
-                forgotPassword() {
-                        this.loader = true;
-                        let obj_2 = {
-                            iin: this.register.login,
-                            phone: this.register.phone,
+                confirmationTeacher() {
+                     this.loader =true;
+                      let obj = {
+                            phone: this.register.login,
                             password: this.register.password
                         };
 
-                        this.$http.post('/signup/forgot_password', obj_2)
+                        this.$http.post('/login', obj)
                         .then(res => {
-                            console.log(res.data);
-                            if(res.data) {
-                                console.log(res.data.message);
-                                 if(res.data.message =='UPDATED') {
-                                     this.register.success = 'Пароль успешно изменен';
-                         
-                                     this.loader = false;
-                                    //  this.$router.go(this.$router.currentRoute);
-                                    //  location.reload();
-                                 }
-    
+                            
+                            if(res.data.access_token!='') {
+                                localStorage.setItem("access_token",res.data.access_token);
+                                localStorage.setItem("phone_number", this.register.login);
+                                this.$router.push('/user');
+                                this.loader = false;
                             }
-                    
+
+                            // localStorage.setItem("access_token",res.data.access_token);
                         })
                         .catch(error => {
-                            console.log('Ошибка ' + error.response.data.error);
-                            // if(error.response.data.error=="iin must have a length between 12 and 12") {
-                            //         this.register.info = "иин не правильно";
-                            // }
-                            // if(error.response.data.error=="phone must not contain whitespace") {
-                            //         this.register.info = "иин не правильно";
-                            // }
-                        });
-                        // let obj = {
-                        //     phone: this.register.login,
-                        //     password: this.register.password
-                        // };
-
-                        // this.$http.post('/login', obj)
-                        // .then(res => {
-                        //     localStorage.setItem("access_token",res.data.access_token);
-                        //     this.$router.push('/user');
-                        //     // localStorage.setItem("access_token",res.data.access_token);
-                        // })
-                        // .catch(error => {
-                        //     if(error.response.data.error=="phone must not contain whitespace") {
-                        //             this.register.info = "логин не правильно";
-                        //     }
-                        // });
-                },
-                confirmationStudent() {
-
-                        let obj_2 = {
-                            iin: this.register.login,
-                            password: this.register.password
-                        };
-                        this.loader = true;
-                        this.$http.post('/signup/student_login', obj_2)
-                        .then(res => {
-                            if(res.data) {
-                                    
-                                 localStorage.setItem("access_token_student",res.data.access_token);
-                                 localStorage.setItem("all_name",res.data.name+"  "+res.data.surname+"  "+res.data.third_name)
-                                
-                                 this.$router.push('/student');
-                                 this.loader = false;
-                            }
-                    
-                        })
-                        .catch(error => {
-              
-                            if(error.response.data.error=="iin must have a length between 12 and 12") {
-                                    this.register.info = "иин не правильно";
-                            }
                             if(error.response.data.error=="phone must not contain whitespace") {
-                                    this.register.info = "иин не правильно";
+                                    this.register.info = "логин не правильно";
                             }
-
-                            console.log('Ошибка ' + error.response.data.error);
                         });
                 } 
             },
@@ -342,9 +247,9 @@
                         width: 25px;
                         height: 25px;
                     }
-                    .line input {
+                    /* .line input {
                         margin-left: 10px;
-                    }
+                    } */
                     .second-block  {
                         display: flex;
                         align-items: center;

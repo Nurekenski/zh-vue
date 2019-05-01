@@ -11,10 +11,10 @@
 import './assets/style/color.css';
 import './assets/style/fonts.css';
  
+
 export default {
   name: 'app',
   methods: {
-      
       hideMenu() {
           this.$emit('hideNotif');
           this.$emit('hideApps');
@@ -38,7 +38,11 @@ export default {
   margin: 0;
   padding: 0;
 }
-
+@media only screen and (max-width: 600px) {
+      body {
+        background-color: white !important;
+      }
+}
 body {
   background: var(--main-user-page-color);
 }

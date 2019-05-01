@@ -1,127 +1,20 @@
 <!-- template -->
 <template>
-        <header>
-            <div class="leftHeader">
-                <div class="logo">
-               
-                    <img src="../../assets/images/logo_arsu.png" draggable="false">
-                </div>   
-                <div class="menuIcon">
-                    <img src="../../assets/images/menu.png" @click="openMenu" />    
-                </div> 
+     
+           <div>
+               <p>12121</p>
+               <p>12121</p>
             </div>
-            
-            <div class="rightHeader">
-                <div class="notif">
-                    <!-- <img src="../../assets/images/notification.png" @click.stop="openNotif(!showNotif)" class="icons"/> -->
-                   <!-- notifOpen -->
-                    <!-- <div class="notifOpen" v-if="showNotif">
-                    </div> -->
-                </div>
-                <div class="apps">
-                    <!-- <img src="../../assets/images/apps.png" @click.stop="getAllServices(!showApps)" class="icons"/> -->
-                    <!-- appsOpen -->
-                    <div class="appsOpen" v-if="showApps">
-                        <div class="blocksApps">
-                            <img src="../../assets/images/account.png" alt="images">
-                            <p>Account</p>
-                        </div>
-                        <div class="blocksApps">
-                            <img src="../../assets/images/mess.png" alt="images">
-                            <p>Messenger</p>
-                        </div>
-                        <div class="blocksApps">
-                            <img src="../../assets/images/board.png" alt="images">
-                            <p>Board</p>
-                        </div>
-                        <div class="blocksApps">
-                            <img src="../../assets/images/sales.png" alt="images">
-                            <p>Sales</p>
-                        </div>
-                        <div class="blocksApps">
-                            <img src="../../assets/images/travel.png" alt="images">
-                            <p>Travel</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- @click.stop="logout(!showLogout) -->
-                <div class="userProfile" @click="Logout" >
-                    <p>Выйти</p>
-                    <!-- <div class="avatarHeader">
-                        <img src=""/>
-                    </div> -->
-                    <!-- logout -->
-                    <div class="logout" v-if="showLogout">
-                        <p @click="Logout">Выйти</p>
-                    </div>
-                </div>
-            </div>
-        </header> 
+     
 </template>
-
-<!-- scripts -->
-<script>
-    export default {
-        data() {
-            return {
-                  showApps: false,
-                  showNotif: false,
-                  showLogout: false,
-            }
-        },
-        methods: {
-            Logout() {
-                var access_token = localStorage.setItem("access_token","");
-                this.$router.push('/admin');
-            },
-            openMenu() {
-                var menu = document.querySelector('.sidebar');
-                var opM = document.querySelector('.menuBlock');
-                menu.style.transition = ".5s";
-                menu.style.left = "-20px";
-                opM.style.display = "block";
-            },
-            getAllServices(toggle) {
-                this.showLogout = false;
-                this.showNotif = false;
-                this.showApps = toggle;
-            },
-            openNotif(toggle) {
-                this.showLogout = false;
-                this.showApps = false;
-                this.showNotif = toggle;
-            },
-            logout(toggle) {
-                this.showApps = false;
-                this.showNotif = false;
-                this.showLogout = toggle;
-            },
-        },
-        created() {
-            this.$parent.$on('hideNotif',  () => {
-                this.openNotif(false);
-            }); 
-            this.$parent.$on('hideLogout',  () => {
-                this.logout(false);
-            });
-            this.$parent.$on('hideApps',  () => {
-                this.getAllServices(false);
-            }); 
-        }
-    };
-</script>
 
 <!-- style -->
 <style scoped lang="scss"> 
-    .logo img {
-        width: 70px;
-        height: 50px;
-    }
+   
     // menu icons
     .menuIcon {
            display: none;
     }
-
     header {
         width: 100%;
         background: var(--main-white-color);
@@ -130,8 +23,7 @@
         padding-bottom: 20px;
         display: flex;
         margin-bottom: 20px;
-        justify-content: space-between;
-
+  
         .leftHeader{
             width: 50%;
             display: flex;
