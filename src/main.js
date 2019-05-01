@@ -24,7 +24,7 @@ Vue.use(VModal, { dialog: true });
 
 Vue.prototype.$http = axios.create({
 
-  baseURL: 'http://192.168.43.44/v2'
+  baseURL: 'http://192.168.0.100/v2'
   
 });
 
