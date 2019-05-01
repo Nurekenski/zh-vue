@@ -25,10 +25,6 @@ app.use(history({
 }));
 app.use('/',serveStatic(path.join(__dirname,'/dist')));
  
-app.get('/', function (req, res) {
-  res.render(path.join(__dirname + '/dist/index.html'));
-});
-
 const port = process.env.PORT || 8080
 app.listen(port);
 
