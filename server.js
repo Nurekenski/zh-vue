@@ -1,31 +1,16 @@
-// const express = require('express');
-// const serveStatic   = require('serve-static');
-// const path = require('path');
-// const app = express();
-
-// app.use('/',serveStatic(path.join(__dirname,'/dist')));
- 
-// const port = process.env.PORT || 8080
-// app.listen(port);
-
-// console.log('Listening on port ' +port);
-
-const express = require('express');
-const path = require('path');
-const serveStatic   = require('serve-static');
-const history = require('connect-history-api-fallback');
-
-const app = express();
-
-app.use('/',serveStatic(path.join(__dirname,'/dist')));
- 
-app.use(history({
-  disableDotRule: true,
-  verbose: true
-}));
-app.use('/',serveStatic(path.join(__dirname,'/dist')));
- 
+const express = require('express')
+const serveStatic = require('serve-static')
+const path = require('path')
+// create the express app
+const app = express()
+// create middleware to handle the serving the app
+app.use("/", serveStatic ( path.join (__dirname, '/dist') ) )
+// Catch all routes and redirect to the index file
+app.get('*', function (req, res) {
+    res.sendFile(__dirname + '/dist/index.html')
+})
+// Create default port to serve the app on
 const port = process.env.PORT || 8080
-app.listen(port);
-
-console.log('Listening on port ' +port);
+app.listen(port)
+// Log to feedback that this is actually running
+console.log('Server started on port ' + port)
