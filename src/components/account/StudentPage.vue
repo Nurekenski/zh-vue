@@ -306,482 +306,6 @@
                                     </div>
                                 </div>
                                 <div class="first_step" v-show='fourth'>
-                                    <h4>Образование</h4>
-                                    <div>
-                                    
-                                    <div class="double">
-                                        <div class="first">
-                                                <div class="line">
-                                                    <p>Тип учебного заведения</p>
-                                                    <div class="line-select">
-                                                        <multiselect 
-                                                        v-model="register.type_zavedenie"
-                                                        :options="education"
-                                                        :searchable="true"
-                                                        :close-on-select="true"
-                                                        :show-labels="false"
-                                                        placeholder="Тип учебного заведения"
-                                                        class="searchableSelect__"
-                                                        ></multiselect>
-                                                        <p>&#128269;</p>
-                                                    </div>
-                                                </div>
-                                                <div class="line">
-                                                            <!-- <img src="../../assets/images/mail.png"> -->
-                                                        <p>Область месторасположения учебного заведения</p>
-                                                        <div class="line-select">
-                                                                <multiselect 
-                                                                    v-model="register.oblast_zavedenie"
-                                                                    :options="country"
-                                                                    :searchable="true"
-                                                                    :close-on-select="true"
-                                                                    :show-labels="false"
-
-                                                                    class="searchableSelect__"
-                                                                ></multiselect>
-                                                                <p>&#128269;</p>
-                                                        </div>
-                                                </div>
-                                                <div class="line">
-                                                        <p>Район месторасположения учебного заведения</p>
-                                                        <div class="line-select" v-if="register.oblast_zavedenie!='no'">
-                                                                <multiselect 
-                                                                    v-model="register.raion_zavedenie"
-                                                                    :options="list[register.oblast_zavedenie]"
-                                                                    :searchable="true"
-                                                                    :close-on-select="true"
-                                                                    :show-labels="false"
-                                                                    placeholder="Район месторасположения"
-                                                                    class="searchableSelect__"
-                                                                >
-                                                                </multiselect>  
-                                                                <p>&#128269;</p>  
-                                                        </div>
-                                                        <div class="line-select" v-else>
-                                                                <multiselect 
-                                                                    v-model="register.raion_zavedenie"
-                                                                    :options="empty"
-                                                                    :searchable="true"
-                                                                    :close-on-select="true"
-                                                                    :show-labels="false"
-                                                                    placeholder="Тип учебного заведения"
-                                                                    class="searchableSelect__"   
-                                                                ></multiselect>
-                                                                <p>&#128269;</p>    
-                                                        </div>      
-                                                </div>
-                        
-                                                <div class="line">
-                                                        <p>Наименование учебного заведения</p>
-                                                        <input id="input_insert"
-                                                            type="text"
-                                                            v-model="register.name_zavedenie"
-                                                        >
-                                                </div>
-                                        </div>
-                                    <div class="second">       
-                                            <div class="line">
-                                                    <p>Тип документа</p>
-                                                    <select v-model="register.type_obrazovanie">
-                                                        <option>обычный</option>
-                                                        <option>с отличием</option>
-                                                    </select>
-                                            </div>
-                                            <div class="line">
-                                                    <p>Дата выдачи</p>
-                                                    <input id="input_insert" 
-                                                        type="date"
-                                                        placeholder="дата выдачи"
-                                                        v-model="register.date_vidachi_obr">
-                                                    
-                                            </div>
-                                                <div class="line">
-                                                        <p>Серия документа</p>
-                                                        <input id="input_insert" 
-                                                            type="number"
-                                                            placeholder="Серия документа"
-                                                            v-model="register.seria_document"
-                                                            
-                                                        >
-                                                </div>
-                                                <div class="line">
-                                                        <p>Номер документа</p>
-                                                        <input id="input_insert" 
-                                                            type="number"
-                                                            placeholder="Номер документа"
-                                                            v-model="register.nomer_document"
-                                                        >
-                                                </div>
-                                                <!-- <div class="line">
-                                                        <p>Условно зачисленный</p>
-                                                        <input id="input_insert" 
-                                                            class="for_checkbox"
-                                                            type="checkbox"
-                                                            placeholder="дата выдачи"
-                                                            v-model="register.uslovno_zachislen"
-                                                        >
-                                                </div> -->
-                                                <div class="line">
-                                                        <p>Загрузить аттестат</p>
-                                                        <input 
-                                                            type="file" 
-                                                            id="second_path"
-                                                            ref="second_path"
-                                                            v-on:change="onChangeUpload()"
-                                                        >
-                                                </div>
-                                            
-                                            </div>
-                                        </div>
-                                        </div> 
-
-                                        <div class="arrow">
-                                            <button class="next" @click="prevPage('third')">&#x3c;</button>
-                                            <button class="next" @click="nextPage('fifth')">&#x3e;</button>
-                                        </div>
-                                        <div class="level">
-                                            <span  class="static"
-                                            v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                            <span class="static"
-                                            v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                            <span   class="static"
-                                            v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                            <span   class="static"
-                                            v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        </div>
-                                </div>
-                                
-                                <div class="first_step" v-show='fifth'>
-                                    <h4>Сертификат ЕнТ</h4>
-                                    <div>
-                                        <div class="line">
-                                                        <p>Номер сертификата (или протокол собеседования)</p>
-                                                        <input id="input_insert" 
-                                                            type="text"
-                                                            placeholder="Номер сертификата"
-                                                            v-model="register.number_certificate"
-                                                        >
-                                        </div>
-                                        <div class="line">
-                                                        <p>Серия сертификата</p>
-                                                        <input id="input_insert" 
-                                                            
-                                                            type="text"
-                                                            placeholder="Серия сертификата"
-                                                            v-model="register.seria_certificate"
-                                                        >
-                                        </div>
-                                        <div class="line">
-                                                        <p>Дата выдачи сертификата</p>
-                                                        <input id="input_insert" 
-                                                            type="date"
-                                                            placeholder="Дата выдачи сертификата"
-                                                            v-model="register.date_certificate"
-                                                        >
-                                        </div>
-                                        <div class="line">
-                                                        <p>Заргрузить сертификат</p>
-                                                        <input 
-                                                            type="file"
-                                                            placeholder="Загрузить сертификат"
-                                                            ref="third_path"
-                                                            id="third_path"
-                                                            v-on:change="onChangeUpload()"
-                                                        >
-                                        </div>
-                                        <div class="line" >
-                                            <p>на гранд / платное обучение / условно/ иностранцы</p>
-                                            <div class="line-select">
-                                            <multiselect 
-                                                v-model="register.grand_platni"
-                                                :options="grand_platni"
-                                                :searchable="true"
-                                                :close-on-select="true"
-                                                :show-labels="false"
-                                                placeholder="на гранд / платное обучение"
-                                                class="searchableSelect__"
-                                            ></multiselect>  
-                                            <p>&#128269;</p> 
-                                            </div>
-                                        </div>
-                                        <div class="line" >
-                                            <p>Выберите на базе школы/колледжа/ВО</p>
-                                            <div class="line-select">
-                                            <multiselect 
-                                                v-model="register.na_baze"
-                                                :options="na_baze"
-                                                :searchable="true"
-                                                :close-on-select="true"
-                                                :show-labels="false"
-                                                placeholder="Выберите на базе школы/колледжа/ВО"
-                                                class="searchableSelect__"
-                                            ></multiselect>  
-                                            <p>&#128269;</p> 
-                                            </div>
-                                        </div>
-                                    
-                                    </div>
-                                    <div class="arrow">
-                                        <button class="next" @click="prevPage('fourth')">&#x3c;</button>
-                                        <button class="next" @click="nextPage('sixth')">&#x3e;</button>
-                                    </div>
-                                    <div class="level">
-                                        <span  class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        <span class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        <span   class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        <span   class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                    </div>
-                                </div>
-                                <div class="first_step" v-show='sixth'>
-                                    <h4 style="padding-bottom: 10px">Свидетельство о гранте</h4>
-                                    <div>
-                                    <div class="double">
-                                        <div class="first">
-                                            <div class="line-check" style="padding-bottom: 10px">
-                                                <p style="color:green; font-weight: bold">Номер свидетельства не обязательное поле *</p>
-                                                <input id="input_insert" v-model="register.nomer_svidetelstva"
-                                                required
-                                                >
-                                            </div>
-                                            <div class="line-check">
-                                                <p style="color:green; font-weight: bold">Загрузить свидетельства не обязательное поле *</p>
-                                                <input
-                                                     type="file"
-                                                     placeholder="Загрузить свидетельства"
-                                                     ref="fourth_path"
-                                                     id="fourth_path"
-                                                     v-on:change="onChangeUpload()"
-                                                >
-                                            </div>
-                                            <h4>Квоты</h4>
-                                            <div class="line ">
-                                                    <p>Серпин</p>
-                                                    <input id="input_insert"
-                                                    class="for_checkbox"
-                                                    type="checkbox"
-                                                    v-model="register.serpin"
-                                                    >
-                                            </div>
-                                            <div class="line">
-                                                    <p>дети сироты</p>
-                                                    <input id="input_insert"
-                                                    class="for_checkbox"
-                                                    type="checkbox"
-                                                    v-model="register.deti_siroti"
-                                                    >
-                                            </div>
-                                            <div class="line">
-                                                    <p>Инвалид 1-й группа</p>
-                                                    <input id="input_insert"
-                                                    class="for_checkbox"
-                                                    type="checkbox"
-                                                    v-model="register.invalid_pervi"
-                                                    >
-                                            </div>
-                                            
-                                        <div class="line">
-                                                <p>Инвалид 2-й группа</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.invalid_vtoroi"
-                                                >
-                                        </div>
-                                        <div class="line">
-                                                <p>Инвалид с детства</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.invalid_sdetstva"
-                                                >
-                                        </div>
-                                        <div class="line">
-                                                <p>Квота для лиц приравненных по льготам и </p>
-                                                <p>гарантиям к участникам и инвалидам ВОВ</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.kvota_invalidam"
-                                                >
-                                        </div>
-                                        <div class="line">
-                                                <p>Сельская квота</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.selskaya_kvota"
-                                                >
-                                        </div>
-                                        <div class="line last-line">
-                                                <p>Квота для лиц казахской национальностей,</p>
-                                                <p> не являющихся гражданами РК</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.kvota_negrajdan"
-                                                >
-                                        </div>
-                                        </div>
-                                    
-                                    </div>
-                                    
-                                    </div>
-                                
-                                    <div class="arrow">
-                                        <button class="next" @click="prevPage('fifth')">&#x3c;</button>
-                                        <button class="next" @click="nextPage('seventh')">&#x3e;</button>
-                                    </div>
-                                    
-                                    <div class="level">
-                                        <span  class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        <span class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        <span   class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        <span   class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                    </div>
-                            
-                                </div>
-                                <div class="first_step" v-show='seventh'>
-                                    <h4>Награды</h4>
-                                    <div class="nagradi">
-                                    <div class="double">
-                                    <div class="first">
-                                                <div class="line">
-                                                <p>победитель международной олимпиады</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_mej_olimp"
-                                                >
-                                            </div>
-                                            <div class="line">
-                                                <p>победитель республиканской олимпиады</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_resp_olimp"
-                                                >
-                                            </div>
-                                            <div class="line">
-                                                <p>знак "Алтын белгi"</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.znak_altin"
-                                                >
-                                            </div>
-                                                <div class="line">
-                                                <p>аттестат особого образца</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.atestat_osobo"
-                                                >
-                                            </div>
-                                            <div class="line">
-                                                <p>победитель международного научного конкурса</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_mej_nau"
-                                                >
-                                            </div>
-                                                <div class="line">
-                                                <p>победитель республиканского научного конкурса</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_resp_nau"
-                                                >
-                                            </div>
-                                                <div class="line">
-                                                <p>победитель республиканского научного конкурса</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_mej_sport"
-                                                >
-                                            </div>
-                                                <div class="line">
-                                                <p>победитель международного спортивного соревнования</p>
-                                                <p>и победитель республиканских спортивных соревнова</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_gorod_nau"
-                                                >
-                                            </div>
-                                                <div class="line">
-                                                <p>победитель городского научного конкурса</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_gorod_olimp"
-                                                >
-                                            </div>
-                                    </div>
-                                    <div class="second"> 
-                                            <div class="line">
-                                                <p>победитель городской олимпиады</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_gorod_olimp"
-                                            >
-                                            </div>
-                                                <div class="line">
-                                                <p>победитель областного научного конкурса</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_obl_nau_konkurs"
-                                                >
-                                            </div>
-                                                <div class="line">
-                                                <p>победитель областной олимпиады</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_obl_olimp"
-                                                >
-                                            </div>
-                                            <div class="line">
-                                                <p>побидитель международной выставки</p>
-                                                <input id="input_insert"
-                                                class="for_checkbox"
-                                                type="checkbox"
-                                                v-model="register.pob_mej_vistavki"
-                                                >
-                                            </div>
-                                    </div>
-                                        
-                                    </div>
-                                    </div>
-                                    <div class="arrow">
-                                        <button class="next" @click="prevPage('sixth')">&#x3c;</button>
-                                        <button class="next" @click="nextPage('eigth')">&#x3e;</button>
-                                    </div>
-                                    
-                                    <div class="level">
-                                        <span  class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        <span class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        <span   class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                        <span   class="static"
-                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
-                                    </div>
-                                                
-                                </div>
-                                <div class="first_step" v-show='eigth'>
                                     <h4>Специальности</h4>
                                     <div>
                                     <div class="double">
@@ -907,7 +431,480 @@
                                     </div>
                                 
                                     </div>
+                                    <div class="arrow">
+                                        <button class="next" @click="prevPage('third')">&#x3c;</button>
+                                        <button class="next" @click="nextPage('fifth')">&#x3e;</button>
+                                    </div>
+                                    <div class="level">
+                                        <span  class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span   class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span   class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="first_step" v-show='fifth'>
+                                    <h4>Образование</h4>
+                                    <div>
+                                    <div class="double">
+                                        <div class="first">
+                                                <div class="line">
+                                                    <p>Тип учебного заведения</p>
+                                                    <div class="line-select">
+                                                        <multiselect 
+                                                        v-model="register.type_zavedenie"
+                                                        :options="education"
+                                                        :searchable="true"
+                                                        :close-on-select="true"
+                                                        :show-labels="false"
+                                                        placeholder="Тип учебного заведения"
+                                                        class="searchableSelect__"
+                                                        ></multiselect>
+                                                        <p>&#128269;</p>
+                                                    </div>
+                                                </div>
+                                                <div class="line">
+                                                            <!-- <img src="../../assets/images/mail.png"> -->
+                                                        <p>Область месторасположения учебного заведения</p>
+                                                        <div class="line-select">
+                                                                <multiselect 
+                                                                    v-model="register.oblast_zavedenie"
+                                                                    :options="country"
+                                                                    :searchable="true"
+                                                                    :close-on-select="true"
+                                                                    :show-labels="false"
+
+                                                                    class="searchableSelect__"
+                                                                ></multiselect>
+                                                                <p>&#128269;</p>
+                                                        </div>
+                                                </div>
+                                                <div class="line">
+                                                        <p>Район месторасположения учебного заведения</p>
+                                                        <div class="line-select" v-if="register.oblast_zavedenie!='no'">
+                                                                <multiselect 
+                                                                    v-model="register.raion_zavedenie"
+                                                                    :options="list[register.oblast_zavedenie]"
+                                                                    :searchable="true"
+                                                                    :close-on-select="true"
+                                                                    :show-labels="false"
+                                                                    placeholder="Район месторасположения"
+                                                                    class="searchableSelect__"
+                                                                >
+                                                                </multiselect>  
+                                                                <p>&#128269;</p>  
+                                                        </div>
+                                                        <div class="line-select" v-else>
+                                                                <multiselect 
+                                                                    v-model="register.raion_zavedenie"
+                                                                    :options="empty"
+                                                                    :searchable="true"
+                                                                    :close-on-select="true"
+                                                                    :show-labels="false"
+                                                                    placeholder="Тип учебного заведения"
+                                                                    class="searchableSelect__"   
+                                                                ></multiselect>
+                                                                <p>&#128269;</p>    
+                                                        </div>      
+                                                </div>
+                        
+                                                <div class="line">
+                                                        <p>Наименование учебного заведения</p>
+                                                        <input id="input_insert"
+                                                            type="text"
+                                                            v-model="register.name_zavedenie"
+                                                        >
+                                                </div>
+                                        </div>
+                                    <div class="second">       
+                                            <div class="line">
+                                                    <p>Тип документа</p>
+                                                    <select v-model="register.type_obrazovanie">
+                                                        <option>обычный</option>
+                                                        <option>с отличием</option>
+                                                    </select>
+                                            </div>
+                                            <div class="line">
+                                                    <p>Дата выдачи</p>
+                                                    <input id="input_insert" 
+                                                        type="date"
+                                                        placeholder="дата выдачи"
+                                                        v-model="register.date_vidachi_obr">
+                                                    
+                                            </div>
+                                                <div class="line">
+                                                        <p>Серия документа</p>
+                                                        <input id="input_insert" 
+                                                            type="number"
+                                                            placeholder="Серия документа"
+                                                            v-model="register.seria_document"
+                                                            
+                                                        >
+                                                </div>
+                                                <div class="line">
+                                                        <p>Номер документа</p>
+                                                        <input id="input_insert" 
+                                                            type="number"
+                                                            placeholder="Номер документа"
+                                                            v-model="register.nomer_document"
+                                                        >
+                                                </div>
+                                                <!-- <div class="line">
+                                                        <p>Условно зачисленный</p>
+                                                        <input id="input_insert" 
+                                                            class="for_checkbox"
+                                                            type="checkbox"
+                                                            placeholder="дата выдачи"
+                                                            v-model="register.uslovno_zachislen"
+                                                        >
+                                                </div> -->
+                                                <div class="line">
+                                                        <p>Загрузить аттестат</p>
+                                                        <input 
+                                                            type="file" 
+                                                            id="second_path"
+                                                            ref="second_path"
+                                                            v-on:change="onChangeUpload()"
+                                                        >
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                        </div> 
+                                    <div class="arrow">
+                                        <button class="next" @click="prevPage('fourth')">&#x3c;</button>
+                                        <button class="next" @click="nextPage('sixth')">&#x3e;</button>
+                                    </div>
+                                    <div class="level">
+                                        <span  class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span   class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span   class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                    </div>
+                                </div>
+                                <div class="first_step" v-show='sixth'>
+                                    <h4>Сертификат ЕнТ</h4>
+                                    <div>
+                                        <div class="line">
+                                                        <p>Номер сертификата (или протокол собеседования)</p>
+                                                        <input id="input_insert" 
+                                                            type="text"
+                                                            placeholder="Номер сертификата"
+                                                            v-model="register.number_certificate"
+                                                        >
+                                        </div>
+                                        <div class="line">
+                                                        <p>Серия сертификата</p>
+                                                        <input id="input_insert" 
+                                                            
+                                                            type="text"
+                                                            placeholder="Серия сертификата"
+                                                            v-model="register.seria_certificate"
+                                                        >
+                                        </div>
+                                        <div class="line">
+                                                        <p>Дата выдачи сертификата</p>
+                                                        <input id="input_insert" 
+                                                            type="date"
+                                                            placeholder="Дата выдачи сертификата"
+                                                            v-model="register.date_certificate"
+                                                        >
+                                        </div>
+                                        <div class="line">
+                                                        <p>Заргрузить сертификат</p>
+                                                        <input 
+                                                            type="file"
+                                                            placeholder="Загрузить сертификат"
+                                                            ref="third_path"
+                                                            id="third_path"
+                                                            v-on:change="onChangeUpload()"
+                                                        >
+                                        </div>
+                                        <div class="line" >
+                                            <p>на гранд / платное обучение / условно/ иностранцы</p>
+                                            <div class="line-select">
+                                            <multiselect 
+                                                v-model="register.grand_platni"
+                                                :options="grand_platni"
+                                                :searchable="true"
+                                                :close-on-select="true"
+                                                :show-labels="false"
+                                                placeholder="на гранд / платное обучение"
+                                                class="searchableSelect__"
+                                            ></multiselect>  
+                                            <p>&#128269;</p> 
+                                            </div>
+                                        </div>
+                                        <div class="line" >
+                                            <p>Выберите на базе школы/колледжа/ВО</p>
+                                            <div class="line-select">
+                                            <multiselect 
+                                                v-model="register.na_baze"
+                                                :options="na_baze"
+                                                :searchable="true"
+                                                :close-on-select="true"
+                                                :show-labels="false"
+                                                placeholder="Выберите на базе школы/колледжа/ВО"
+                                                class="searchableSelect__"
+                                            ></multiselect>  
+                                            <p>&#128269;</p> 
+                                            </div>
+                                        </div>
                                     
+                                    </div>
+                                    <div class="arrow">
+                                        <button class="next" @click="prevPage('fifth')">&#x3c;</button>
+                                        <button class="next" @click="nextPage('seventh')">&#x3e;</button>
+                                    </div>
+                                    
+                                    <div class="level">
+                                        <span  class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span   class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span   class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                    </div>
+                            
+                                </div>
+                                <div class="first_step" v-show='seventh'>
+                                    <h4 style="padding-bottom: 10px">Свидетельство о гранте</h4>
+                                    <div>
+                                    <div class="double">
+                                        <div class="first">
+                                            <div class="line-check" style="padding-bottom: 10px">
+                                                <p style="color:green; font-weight: bold">Номер свидетельства не обязательное поле *</p>
+                                                <input id="input_insert" v-model="register.nomer_svidetelstva"
+                                                required
+                                                >
+                                            </div>
+                                            <div class="line-check">
+                                                <p style="color:green; font-weight: bold">Загрузить свидетельства не обязательное поле *</p>
+                                                <input
+                                                     type="file"
+                                                     placeholder="Загрузить свидетельства"
+                                                     ref="fourth_path"
+                                                     id="fourth_path"
+                                                     v-on:change="onChangeUpload()"
+                                                >
+                                            </div>
+                                            <h4>Квоты</h4>
+                                            <div class="line ">
+                                                    <p>Серпин</p>
+                                                    <input id="input_insert"
+                                                    class="for_checkbox"
+                                                    type="checkbox"
+                                                    v-model="register.serpin"
+                                                    >
+                                            </div>
+                                            <div class="line">
+                                                    <p>дети сироты</p>
+                                                    <input id="input_insert"
+                                                    class="for_checkbox"
+                                                    type="checkbox"
+                                                    v-model="register.deti_siroti"
+                                                    >
+                                            </div>
+                                            <div class="line">
+                                                    <p>Инвалид 1-й группа</p>
+                                                    <input id="input_insert"
+                                                    class="for_checkbox"
+                                                    type="checkbox"
+                                                    v-model="register.invalid_pervi"
+                                                    >
+                                            </div>
+                                            
+                                        <div class="line">
+                                                <p>Инвалид 2-й группа</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.invalid_vtoroi"
+                                                >
+                                        </div>
+                                        <div class="line">
+                                                <p>Инвалид с детства</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.invalid_sdetstva"
+                                                >
+                                        </div>
+                                        <div class="line">
+                                                <p>Квота для лиц приравненных по льготам и </p>
+                                                <p>гарантиям к участникам и инвалидам ВОВ</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.kvota_invalidam"
+                                                >
+                                        </div>
+                                        <div class="line">
+                                                <p>Сельская квота</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.selskaya_kvota"
+                                                >
+                                        </div>
+                                        <div class="line last-line">
+                                                <p>Квота для лиц казахской национальностей,</p>
+                                                <p> не являющихся гражданами РК</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.kvota_negrajdan"
+                                                >
+                                        </div>
+                                        </div>
+                                    
+                                    </div>
+                                    
+                                    </div>
+                                    
+                                    <div class="arrow">
+                                        <button class="next" @click="prevPage('sixth')">&#x3c;</button>
+                                        <button class="next" @click="nextPage('eigth')">&#x3e;</button>
+                                    </div>
+                                    
+                                    <div class="level">
+                                        <span  class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span   class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                        <span   class="static"
+                                        v-bind:class="{ disable: disable, 'enable': enable }"></span>
+                                    </div>
+                                                
+                                </div>
+                                <div class="first_step" v-show='eigth'>
+                                    <h4>Награды</h4>
+                                    <div class="nagradi">
+                                    <div class="double">
+                                    <div class="first">
+                                                <div class="line">
+                                                <p>победитель международной олимпиады</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_mej_olimp"
+                                                >
+                                            </div>
+                                            <div class="line">
+                                                <p>победитель республиканской олимпиады</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_resp_olimp"
+                                                >
+                                            </div>
+                                            <div class="line">
+                                                <p>знак "Алтын белгi"</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.znak_altin"
+                                                >
+                                            </div>
+                                                <div class="line">
+                                                <p>аттестат особого образца</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.atestat_osobo"
+                                                >
+                                            </div>
+                                            <div class="line">
+                                                <p>победитель международного научного конкурса</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_mej_nau"
+                                                >
+                                            </div>
+                                                <div class="line">
+                                                <p>победитель республиканского научного конкурса</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_resp_nau"
+                                                >
+                                            </div>
+                                                <div class="line">
+                                                <p>победитель республиканского научного конкурса</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_mej_sport"
+                                                >
+                                            </div>
+                                                <div class="line">
+                                                <p>победитель международного спортивного соревнования</p>
+                                                <p>и победитель республиканских спортивных соревнова</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_gorod_nau"
+                                                >
+                                            </div>
+                                                <div class="line">
+                                                <p>победитель городского научного конкурса</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_gorod_olimp"
+                                                >
+                                            </div>
+                                    </div>
+                                    <div class="second"> 
+                                            <div class="line">
+                                                <p>победитель городской олимпиады</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_gorod_olimp"
+                                            >
+                                            </div>
+                                                <div class="line">
+                                                <p>победитель областного научного конкурса</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_obl_nau_konkurs"
+                                                >
+                                            </div>
+                                                <div class="line">
+                                                <p>победитель областной олимпиады</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_obl_olimp"
+                                                >
+                                            </div>
+                                            <div class="line">
+                                                <p>побидитель международной выставки</p>
+                                                <input id="input_insert"
+                                                class="for_checkbox"
+                                                type="checkbox"
+                                                v-model="register.pob_mej_vistavki"
+                                                >
+                                            </div>
+                                    </div>
+                                        
+                                    </div>
+                                    </div>
                                     <div class="arrow">
                                         <button class="next" @click="prevPage('seventh')">&#x3c;</button>
                                     </div>
